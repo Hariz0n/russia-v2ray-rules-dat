@@ -3,6 +3,8 @@ module merge-geosite-ru-whitelist
 go 1.22.6
 
 require (
+	github.com/adrg/xdg v0.5.0 // indirect
+	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/v2fly/v2ray-core/v5 v5.21.0
 	google.golang.org/protobuf v1.35.1
 )
