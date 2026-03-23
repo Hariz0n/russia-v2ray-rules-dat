@@ -13,6 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Set variables
         run: |
           echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
@@ -40,7 +43,9 @@ jobs:
           curl -sSL $GEOIP_URL.sha256sum > ./publish/geoip.dat.sha256sum
           
           curl -sSL $GEOSITE_URL > ./publish/geosite.dat
-          curl -sSL $GEOSITE_URL.sha256sum > ./publish/geosite.dat.sha256sum
+          ( cd scripts/merge-geosite-ru-whitelist && go mod download && go run . ../../publish/geosite.dat ../../data/ru-whitelist ../../publish/geosite.dat.merged )
+          mv ./publish/geosite.dat.merged ./publish/geosite.dat
+          ( cd ./publish && sha256sum geosite.dat > geosite.dat.sha256sum )
 
       - name: Generate sing-box srs
         run: |
