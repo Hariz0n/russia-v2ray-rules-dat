@@ -43,7 +43,7 @@ jobs:
           curl -sSL $GEOIP_URL.sha256sum > ./publish/geoip.dat.sha256sum
           
           curl -sSL $GEOSITE_URL > ./publish/geosite.dat
-          ( cd scripts/merge-geosite-ru-whitelist && go mod tidy && go run . ../../publish/geosite.dat ../../data/ru-whitelist ../../publish/geosite.dat.merged )
+          ( cd scripts/merge-geosite-ru-whitelist && go run . ../../publish/geosite.dat ../../data/ru-whitelist ../../publish/geosite.dat.merged )
           mv ./publish/geosite.dat.merged ./publish/geosite.dat
           ( cd ./publish && sha256sum geosite.dat > geosite.dat.sha256sum )
 
